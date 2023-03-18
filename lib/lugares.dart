@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class Lugares extends StatelessWidget {
@@ -21,6 +23,9 @@ class Lugares extends StatelessWidget {
                   children: <Widget>[
                     Image.network(
                       "https://www.peru.travel/Contenido/Home/Imagen/en/12/1.9/Banner/start-en-ds.jpg",
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: 220,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10.0),
