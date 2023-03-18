@@ -11,6 +11,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class SplashScreenState extends State<SplashScreen> {
+  final colorP = const Color.fromARGB(253, 26, 0, 131);
   @override
   void initState() {
     super.initState();
@@ -31,9 +32,13 @@ class SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.white,
+        // color: Colors.white,
+        color: colorP,
         child: Center(
-          child: Image.asset('images/logo.jpeg'),
+          child: Image.asset(
+            'images/logo.jpeg',
+            width: 340,
+          ),
         ),
       ),
     );
