@@ -24,9 +24,9 @@ class HomeState extends State<Home> {
   Widget _getDrawerItemWidget(int pos) {
     switch (pos) {
       case 0:
-        return const Usuarios();
-      case 1:
         return const Lugares();
+      case 1:
+        return const Usuarios();
       default:
         return const Text('error');
     }
@@ -51,17 +51,17 @@ class HomeState extends State<Home> {
             ListTile(
               leading: const Icon(Icons.airplanemode_active),
               title: const Text('Lugares'),
-              selected: _selectedIndex == 1,
+              selected: _selectedIndex == 0,
               onTap: () {
-                updateSelectedIndex(1);
+                updateSelectedIndex(0);
               },
             ),
             ListTile(
               leading: const Icon(Icons.savings),
               title: const Text('Ofertas'),
-              selected: _selectedIndex == 0,
+              selected: _selectedIndex == 1,
               onTap: () {
-                updateSelectedIndex(0);
+                updateSelectedIndex(1);
               },
             ),
             ListTile(
