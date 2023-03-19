@@ -13,7 +13,7 @@ class PlaceService {
       join(await getDatabasesPath(), 'places_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE places(id INTEGER PRIMARY KEY, name TEXT, description TEXT, image TEXT)',
+          'CREATE TABLE places(id INTEGER PRIMARY KEY, name TEXT, tag TEXT,location TEXT, image TEXT,price REAL)',
         );
       },
       version: 1,
@@ -28,6 +28,29 @@ class PlaceService {
       place.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+  }
+
+  Future<void> insertDummyData() async {
+    final place = Place(
+      id: 1,
+      name: 'Lugar 1',
+      tag: 'ida y vuelta',
+      location: 'Argentina',
+      image: Uri.parse(
+          'https://www.peru.travel/Contenido/Home/Imagen/en/12/1.9/Banner/start-en-ds.jpg'),
+      price: 600,
+    );
+    final place2 = Place(
+      id: 2,
+      name: 'Cancun',
+      tag: 'Mexico',
+      location: 'solo ida',
+      image: Uri.parse(
+          'https://media.staticontent.com/media/pictures/ebce817f-05a2-48d0-9ed2-1afa41805e30'),
+      price: 10000,
+    );
+    await insertPlace(place);
+    await insertPlace(place2);
   }
 
   Future<List<Place>> places() async {
