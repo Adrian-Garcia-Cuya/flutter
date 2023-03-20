@@ -7,8 +7,12 @@ class Lugares extends StatelessWidget {
 
   Future<List<Place>> places() async {
     PlaceService placeService = PlaceService();
-    await placeService.insertDummyData();
-    return placeService.places();
+    final countDB = await placeService.places();
+    if (countDB.isEmpty) {
+      await placeService.insertDummyData();
+      return placeService.places();
+    }
+    return countDB;
   }
 
   @override
@@ -24,7 +28,7 @@ class Lugares extends StatelessWidget {
                   separatorBuilder: (BuildContext context, int index) {
                     return const SizedBox(height: 20);
                   },
-                  itemCount: 5,
+                  itemCount: snapshot.data?.length ?? 0,
                   itemBuilder: (context, index) {
                     return Card(
                       shape: RoundedRectangleBorder(
@@ -32,7 +36,7 @@ class Lugares extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Image.network(
-                            "https://www.peru.travel/Contenido/Home/Imagen/en/12/1.9/Banner/start-en-ds.jpg",
+                            snapshot.data?[index].image.toString() ?? '',
                             fit: BoxFit.cover,
                             width: double.infinity,
                             height: 220,
@@ -47,9 +51,9 @@ class Lugares extends StatelessWidget {
                                   children: [
                                     Container(
                                       margin: const EdgeInsets.only(bottom: 10),
-                                      child: const Text(
-                                        "Cancun",
-                                        style: TextStyle(
+                                      child: Text(
+                                        snapshot.data?[index].name ?? '',
+                                        style: const TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
                                           color: Color(0xff2E2E2E),
@@ -58,9 +62,9 @@ class Lugares extends StatelessWidget {
                                     ),
                                     Container(
                                       margin: const EdgeInsets.only(bottom: 10),
-                                      child: const Text(
-                                        "ida y vuelta",
-                                        style: TextStyle(
+                                      child: Text(
+                                        snapshot.data?[index].tag ?? '',
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black54),
@@ -87,12 +91,13 @@ class Lugares extends StatelessWidget {
                                   children: [
                                     Container(
                                       margin: const EdgeInsets.only(bottom: 10),
-                                      child: const Text(
-                                        "s./345.99",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Color(0xff2E2E2E)),
+                                      child: Text(
+                                        "s./${snapshot.data?[index].price.toString()}",
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xff2E2E2E),
+                                        ),
                                       ),
                                     ),
                                     Container(

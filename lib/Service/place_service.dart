@@ -49,8 +49,18 @@ class PlaceService {
           'https://media.staticontent.com/media/pictures/ebce817f-05a2-48d0-9ed2-1afa41805e30'),
       price: 10000,
     );
+    final place3 = Place(
+      id: 3,
+      name: 'Machu Pichu',
+      tag: 'ida y vuelta',
+      location: 'Peru',
+      image: Uri.parse(
+          'https://www.metrojourneys.com/wp-content/uploads/2019/07/machu-picchu-peru-tours.jpg'),
+      price: 4500.23,
+    );
     await insertPlace(place);
     await insertPlace(place2);
+    await insertPlace(place3);
   }
 
   Future<List<Place>> places() async {
