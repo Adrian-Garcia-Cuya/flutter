@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nav/login_view.dart';
 import 'package:nav/home.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,9 +21,10 @@ class SplashScreenState extends State<SplashScreen> {
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const Home(
-            title: 'Flutter',
-          ),
+          // builder: (context) => const Home(
+          //   title: 'Flutter',
+          // ),
+          builder: (context) => const LoginView(),
         ),
       ),
     );

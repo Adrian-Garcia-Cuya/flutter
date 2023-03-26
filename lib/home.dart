@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import 'Service/auth_service.dart';
+import 'login_view.dart';
 import 'lugares.dart';
 import 'usuarios.dart';
 
@@ -87,6 +89,20 @@ class HomeState extends State<Home> {
               selected: _selectedIndex == 3,
               onTap: () {
                 updateSelectedIndex(3);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Cerrar sesion'),
+              selected: _selectedIndex == 3,
+              onTap: () async {
+                final navigator = Navigator.of(context);
+                await AuthService().signOut();
+                navigator.pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const LoginView(),
+                  ),
+                );
               },
             ),
           ],
