@@ -12,26 +12,58 @@ class FavoriteService {
       join(await getDatabasesPath(), 'favorites_database.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE data_user(id INTEGER PRIMARY KEY, name TEXT, email TEXT, password TEXT)',
+          'CREATE TABLE favorites(id INTEGER PRIMARY KEY, name TEXT, img TEXT, price TEXT, country TEXT)',
         );
       },
       version: 1,
     );
   }
 
+  Future<void> insertFavorite(Favorite favorite) async {
+    final Database db = await getDb();
+
+    await db.insert(
+      'favorites',
+      favorite.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<void> insertDummy() async {
+    Favorite fv = Favorite(
+        id: '1',
+        name: 'Lugar 1',
+        img:
+            'https://www.peru.travel/Contenido/Home/Imagen/en/12/1.9/Banner/start-en-ds.jpg',
+        price: '600',
+        country: 'Argentina');
+    await insertFavorite(fv);
+  }
+
+  Future<void> deleteFavorite(String id) async {
+    final Database db = await getDb();
+
+    await db.delete(
+      'favorites',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
   Future<List<Favorite>> getFavorites() async {
     final Database db = await getDb();
 
-    final List<Map<String, dynamic>> maps = await db.query('data_user');
+    final List<Map<String, dynamic>> maps = await db.query('favorites');
 
     return List.generate(maps.length, (i) {
-      return Favorite(
-        id: maps[i]['id'],
+      Favorite fvNew = Favorite(
+        id: maps[i]['id'].toString(),
         name: maps[i]['name'],
-        imgUrl: maps[i]['imgUrl'],
-        location: maps[i]['location'],
+        img: maps[i]['img'],
+        country: maps[i]['country'],
         price: maps[i]['price'],
       );
+      return fvNew;
     });
   }
 }

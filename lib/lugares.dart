@@ -4,6 +4,9 @@ import 'package:nav/Model/fligth.dart';
 import 'package:nav/Model/place.dart';
 import 'package:nav/Service/place_service.dart';
 
+import 'Model/favorite.dart';
+import 'Service/favorite_service.dart';
+
 class Lugares extends StatelessWidget {
   const Lugares({super.key});
 
@@ -19,6 +22,16 @@ class Lugares extends StatelessWidget {
 
   Future<List<Fligth>> generarVuelos() async {
     return await FlightApi().fetchVuelos();
+  }
+
+  Future<void> addFavorite(Favorite fv) async {
+    try {
+      FavoriteService favoriteService = FavoriteService();
+      await favoriteService.insertFavorite(fv);
+    } catch (e) {
+      print('err');
+      print(e);
+    }
   }
 
   @override
@@ -84,7 +97,19 @@ class Lugares extends StatelessWidget {
                                               BorderRadius.circular(60.0)),
                                       child: IconButton(
                                         onPressed: () {
-                                          print("favoritos");
+                                          Favorite fv = Favorite(
+                                              name:
+                                                  snapshot.data?[index].name ??
+                                                      '',
+                                              price: snapshot.data?[index].price
+                                                      .toString() ??
+                                                  '0',
+                                              img: snapshot.data?[index].img ??
+                                                  '',
+                                              country: snapshot
+                                                      .data?[index].country ??
+                                                  '');
+                                          addFavorite(fv);
                                         },
                                         icon: const Icon(Icons.favorite_border),
                                         color: Colors.white,

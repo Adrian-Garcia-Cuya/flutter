@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:nav/favorites.dart';
+import 'package:nav/favoritesView.dart';
 import 'package:nav/offers.dart';
 import 'package:nav/profile_view.dart';
 import 'lugares.dart';
@@ -57,7 +57,7 @@ class HomeState extends State<Home> {
       case 2:
         return const MyFlights();
       case 3:
-        return const Favorites();
+        return const FavoritesView();
       case 4:
         return const ProfileView();
       default:
