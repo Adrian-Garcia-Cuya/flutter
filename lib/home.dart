@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
+import 'package:nav/favorites.dart';
+import 'package:nav/offers.dart';
 import 'package:nav/profile_view.dart';
-import 'Service/auth_service.dart';
-import 'login_view.dart';
 import 'lugares.dart';
-import 'usuarios.dart';
+import 'my_flights.dart';
 
 class Home extends StatefulWidget {
   const Home({
@@ -43,9 +43,6 @@ class HomeState extends State<Home> {
       case 4:
         title = 'Mi cuenta';
         break;
-      case 5:
-        title = 'Mi cuenta';
-        break;
       default:
         title = 'error';
     }
@@ -56,8 +53,12 @@ class HomeState extends State<Home> {
       case 0:
         return const Lugares();
       case 1:
-        return const Usuarios();
-      case 5:
+        return const Offers();
+      case 2:
+        return const MyFlights();
+      case 3:
+        return const Favorites();
+      case 4:
         return const ProfileView();
       default:
         return const Text('error');
@@ -108,17 +109,17 @@ class HomeState extends State<Home> {
             ListTile(
               leading: const Icon(Icons.favorite),
               title: const Text('Favoritos'),
-              selected: _selectedIndex == 4,
+              selected: _selectedIndex == 3,
               onTap: () {
-                updateSelectedIndex(4);
+                updateSelectedIndex(3);
               },
             ),
             ListTile(
               leading: const Icon(Icons.account_circle),
               title: const Text('Mi cuenta'),
-              selected: _selectedIndex == 5,
+              selected: _selectedIndex == 4,
               onTap: () {
-                updateSelectedIndex(5);
+                updateSelectedIndex(4);
               },
             ),
           ],
