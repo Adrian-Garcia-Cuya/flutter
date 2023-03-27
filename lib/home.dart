@@ -64,14 +64,6 @@ class HomeState extends State<Home> {
                 updateSelectedIndex(1);
               },
             ),
-            ListTile(
-              leading: const Icon(Icons.corporate_fare),
-              title: const Text('Hoteles'),
-              selected: _selectedIndex == 2,
-              onTap: () {
-                updateSelectedIndex(2);
-              },
-            ),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.airplane_ticket),

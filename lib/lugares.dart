@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nav/API/api_flight.dart';
+import 'package:nav/Model/fligth.dart';
 import 'package:nav/Model/place.dart';
 import 'package:nav/Service/place_service.dart';
 
@@ -15,13 +17,17 @@ class Lugares extends StatelessWidget {
     return countDB;
   }
 
+  Future<List<Fligth>> generarVuelos() async {
+    return await FlightApi().fetchVuelos();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
         child: FutureBuilder(
-            future: places(),
+            future: generarVuelos(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.separated(
@@ -36,7 +42,7 @@ class Lugares extends StatelessWidget {
                       child: Column(
                         children: <Widget>[
                           Image.network(
-                            snapshot.data?[index].image.toString() ?? '',
+                            snapshot.data?[index].img.toString() ?? '',
                             fit: BoxFit.cover,
                             width: double.infinity,
                             height: 220,
