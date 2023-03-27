@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:nav/API/api_flight.dart';
-import 'package:nav/Model/fligth.dart';
+import 'API/api_flight.dart';
+import 'Model/offer.dart';
 
-class Lugares extends StatelessWidget {
-  const Lugares({super.key});
+class Ofertas extends StatelessWidget {
+  const Ofertas({super.key});
 
-  Future<List<Fligth>> generarVuelos() async {
-    return await FlightApi().fetchVuelos();
+  Future<List<Offer>> generarOfertas() async {
+    return await OfferApi().fetchOffer();
   }
 
   @override
@@ -15,7 +15,7 @@ class Lugares extends StatelessWidget {
       body: Container(
         margin: const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 20),
         child: FutureBuilder(
-            future: generarVuelos(),
+            future: generarOfertas(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return ListView.separated(

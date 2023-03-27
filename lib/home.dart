@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'lugares.dart';
-import 'usuarios.dart';
+import 'ofertas.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key, required this.title});
@@ -26,7 +26,7 @@ class HomeState extends State<Home> {
       case 0:
         return const Lugares();
       case 1:
-        return const Usuarios();
+        return const Ofertas();
       default:
         return const Text('error');
     }
