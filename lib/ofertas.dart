@@ -71,9 +71,7 @@ class Ofertas extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(60.0)),
                                       child: IconButton(
-                                        onPressed: () {
-                                          print("favoritos");
-                                        },
+                                        onPressed: () {},
                                         icon: const Icon(Icons.favorite_border),
                                         color: Colors.white,
                                       ),
@@ -84,16 +82,30 @@ class Ofertas extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Container(
-                                      margin: const EdgeInsets.only(bottom: 10),
-                                      child: Text(
-                                        "s./${snapshot.data?[index].price.toString()}",
-                                        style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xff2E2E2E),
-                                        ),
-                                      ),
-                                    ),
+                                        margin:
+                                            const EdgeInsets.only(bottom: 10),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "s./${double.tryParse(snapshot.data?[index].price.toString() ?? "0")! / 2}",
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffD2001A),
+                                              ),
+                                            ),
+                                            Text(
+                                              '/${snapshot.data?[index].price.toString()}',
+                                              style: const TextStyle(
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color(0xffB2B2B2),
+                                              ),
+                                            )
+                                          ],
+                                        )),
                                     Container(
                                       margin: const EdgeInsets.only(bottom: 10),
                                       child: const Text(
