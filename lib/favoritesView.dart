@@ -14,10 +14,6 @@ class _FavoritesViewState extends State<FavoritesView> {
   Future<List<Favorite>> favorites() async {
     FavoriteService favoriteService = FavoriteService();
     final countDB = await favoriteService.getFavorites();
-    if (countDB.isEmpty) {
-      await favoriteService.insertDummy();
-      return favoriteService.getFavorites();
-    }
     return countDB;
   }
 
