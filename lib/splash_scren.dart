@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:nav/Service/auth_service.dart';
 import 'package:nav/login_view.dart';
 import 'package:nav/home.dart';
 
@@ -18,15 +19,29 @@ class SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       const Duration(seconds: 3),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          // builder: (context) => const Home(
-          //   title: 'Flutter',
-          // ),
-          builder: (context) => const LoginView(),
-        ),
-      ),
+      () => {
+        if (AuthService().verifyAuth() != null)
+          {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Home(),
+              ),
+            )
+          }
+        else
+          {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                // builder: (context) => const Home(
+                //   title: 'Flutter',
+                // ),
+                builder: (context) => const LoginView(),
+              ),
+            ),
+          }
+      },
     );
   }
 

@@ -1,13 +1,14 @@
 import "package:flutter/material.dart";
+import 'package:nav/profile_view.dart';
 import 'Service/auth_service.dart';
 import 'login_view.dart';
 import 'lugares.dart';
 import 'usuarios.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key, required this.title});
-
-  final String title;
+  const Home({
+    super.key,
+  });
 
   @override
   State<Home> createState() => HomeState();
@@ -15,12 +16,39 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   int _selectedIndex = 0;
+  String title = 'Lugares';
 
   void updateSelectedIndex(int index) {
     setState(() {
       _selectedIndex = index;
+      changeTitle(index);
     });
     Navigator.pop(context);
+  }
+
+  void changeTitle(int index) {
+    switch (index) {
+      case 0:
+        title = 'Lugares';
+        break;
+      case 1:
+        title = 'Ofertas';
+        break;
+      case 2:
+        title = 'Mis vuelos';
+        break;
+      case 3:
+        title = 'Favoritos';
+        break;
+      case 4:
+        title = 'Mi cuenta';
+        break;
+      case 5:
+        title = 'Mi cuenta';
+        break;
+      default:
+        title = 'error';
+    }
   }
 
   Widget _getDrawerItemWidget(int pos) {
@@ -29,6 +57,8 @@ class HomeState extends State<Home> {
         return const Lugares();
       case 1:
         return const Usuarios();
+      case 5:
+        return const ProfileView();
       default:
         return const Text('error');
     }
@@ -38,7 +68,7 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       drawer: Drawer(
         child: ListView(
@@ -66,43 +96,29 @@ class HomeState extends State<Home> {
                 updateSelectedIndex(1);
               },
             ),
+            const Divider(),
             ListTile(
-              leading: const Icon(Icons.corporate_fare),
-              title: const Text('Hoteles'),
+              leading: const Icon(Icons.airplane_ticket),
+              title: const Text('Mis vuelos'),
               selected: _selectedIndex == 2,
               onTap: () {
                 updateSelectedIndex(2);
               },
             ),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.airplane_ticket),
-              title: const Text('Mis vuelos'),
-              selected: _selectedIndex == 3,
-              onTap: () {
-                updateSelectedIndex(3);
-              },
-            ),
             ListTile(
               leading: const Icon(Icons.favorite),
               title: const Text('Favoritos'),
-              selected: _selectedIndex == 3,
+              selected: _selectedIndex == 4,
               onTap: () {
-                updateSelectedIndex(3);
+                updateSelectedIndex(4);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Cerrar sesion'),
-              selected: _selectedIndex == 3,
-              onTap: () async {
-                final navigator = Navigator.of(context);
-                await AuthService().signOut();
-                navigator.pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginView(),
-                  ),
-                );
+              leading: const Icon(Icons.account_circle),
+              title: const Text('Mi cuenta'),
+              selected: _selectedIndex == 5,
+              onTap: () {
+                updateSelectedIndex(5);
               },
             ),
           ],

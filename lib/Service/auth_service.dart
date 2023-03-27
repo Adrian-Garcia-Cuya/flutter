@@ -34,4 +34,11 @@ class AuthService {
       print(e);
     }
   }
+
+  verifyAuth() {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+
+    User? user = auth.currentUser;
+    return user;
+  }
 }
