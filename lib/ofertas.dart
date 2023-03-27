@@ -95,7 +95,7 @@ class Ofertas extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              '/${snapshot.data?[index].price.toString()}',
+                                              '/s/.${snapshot.data?[index].price.toString()}',
                                               style: const TextStyle(
                                                 decoration:
                                                     TextDecoration.lineThrough,
@@ -108,18 +108,16 @@ class Ofertas extends StatelessWidget {
                                         )),
                                     Container(
                                       margin: const EdgeInsets.only(bottom: 10),
-                                      child: const Text(
-                                        "del 03/03 al 14/03",
-                                        style: TextStyle(
+                                      child: Text(
+                                        "Fecha: ${snapshot.data?[index].date.toString()}",
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.black54),
                                       ),
                                     ),
                                     ElevatedButton(
-                                      onPressed: () {
-                                        print("ver vuelo");
-                                      },
+                                      onPressed: () {},
                                       child: const Text("Ver vuelo"),
                                     )
                                   ],
